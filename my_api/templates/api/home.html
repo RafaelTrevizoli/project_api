@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Itens</title>
+</head>
+<body>
+    <h1>Lista de Itens</h1>
+    <ul id="lista-itens"></ul>
+
+    <script>
+        async function carregarItens() {
+            let response = await fetch('/api/itens/');
+            let data = await response.json();
+            let lista = document.getElementById('lista-itens');
+            lista.innerHTML = "";
+            data.forEach(item => {
+                let li = document.createElement('li');
+                li.textContent = `${item.id} - ${item.nome}: ${item.descricao}`;
+                lista.appendChild(li);
+            });
+        }
+
+        carregarItens();
+    </script>
+</body>
+</html>
